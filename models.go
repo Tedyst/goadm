@@ -458,7 +458,7 @@ func (m *model) page(page int, search, sortBy string, sortDesc bool) ([][]interf
 			direction = "DESC"
 		}
 
-		sortBy = fmt.Sprintf(` ORDER BY "%v.%v" %v`, m.tableName, sortCol, direction)
+		sortBy = fmt.Sprintf(` ORDER BY %v.%v %v`, m.tableName, sortCol, direction)
 	}
 
 	fromWhere := fmt.Sprintf("FROM %v %v%v", sqlTables, whereStr, searchBlock)
