@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"html/template"
+	"math"
 	"net/http"
 	"strconv"
 	"strings"
@@ -229,7 +230,7 @@ func (a *Admin) handleList(rw http.ResponseWriter, req *http.Request, ps httprou
 	}
 
 	// Page numbers
-	pages := make([]int, int(float64(rows)/25.0+0.5))
+	pages := make([]int, int(math.Ceil(float64(rows)/25.0)))
 
 	for i, _ := range pages {
 		pages[i] = i + 1
