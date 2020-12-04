@@ -70,15 +70,15 @@ func New(path, dbDriver, dbSource string) (*Admin, error) {
 // NewFromConnection sets up the admin with a "path" prefix (typically /admin) and connection of a database
 func NewFromConnection(path string, db *sql.DB) (*Admin, error) {
 	admin := &Admin{
-		db: db,
-		Title: "Admin",
-		sourceDir: fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH")),
-		path: path,
-		sessions: map[string]*session{},
-		models: map[string]*model{},
-		modelGroups: []*modelGroup{},
+		db:             db,
+		Title:          "Admin",
+		sourceDir:      fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH")),
+		path:           path,
+		sessions:       map[string]*session{},
+		models:         map[string]*model{},
+		modelGroups:    []*modelGroup{},
 		registeredRels: map[reflect.Type]*model{},
-		missingRels: map[fields.RelationalField]reflect.Type{}
+		missingRels:    map[fields.RelationalField]reflect.Type{},
 	}
 
 	return admin, nil
