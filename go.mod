@@ -1,4 +1,4 @@
-module github.com/tedyst/goadm
+module github.com/Tedyst/goadm
 
 go 1.15
 
