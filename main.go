@@ -72,7 +72,6 @@ func NewFromConnection(path string, db *sql.DB) (*Admin, error) {
 	admin := &Admin{
 		db:             db,
 		Title:          "Admin",
-		sourceDir:      fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH")),
 		path:           path,
 		sessions:       map[string]*session{},
 		models:         map[string]*model{},
@@ -80,6 +79,8 @@ func NewFromConnection(path string, db *sql.DB) (*Admin, error) {
 		registeredRels: map[reflect.Type]*model{},
 		missingRels:    map[fields.RelationalField]reflect.Type{},
 	}
+	dir := fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH"))
+	admin.SourceDir(dir)
 
 	return admin, nil
 }
