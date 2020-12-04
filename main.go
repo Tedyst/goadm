@@ -67,6 +67,23 @@ func New(path, dbDriver, dbSource string) (*Admin, error) {
 	return admin, nil
 }
 
+// NewFromConnection sets up the admin with a "path" prefix (typically /admin) and connection of a database
+func NewFromConnection(path string, db *sql.DB) (*Admin, error) {
+	admin := &Admin{
+		db: db,
+		Title: "Admin",
+		sourceDir: fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH")),
+		path: path,
+		sessions: map[string]*session{},
+		models: map[string]*model{},
+		modelGroups: []*modelGroup{},
+		registeredRels: map[reflect.Type]*model{},
+		missingRels: map[fields.RelationalField]reflect.Type{}
+	}
+
+	return admin, nil
+}
+
 // SourceDir allows you to override the location in which templates and static content is looked for / served from.
 // If not set, it defaults to $GOPATH/src/github.com/oal/admin. You may also copy "templates" and "static" from there,
 // into your own project, and change SourceDir accordingly.
